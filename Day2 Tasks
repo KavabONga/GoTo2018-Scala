@@ -60,4 +60,9 @@ def task5() = {
   }
   println(getReversed(a))
 }
-task5()
+def task6() = {
+  val a = List(1, 2, 3, 3, 2, 1)
+  def isPalindrom[P](l : List[P]) : Boolean = a.take(a.length / 2) == a.takeRight(a.length / 2).reverse
+  println(isPalindrom(a))
+}
+task6()
