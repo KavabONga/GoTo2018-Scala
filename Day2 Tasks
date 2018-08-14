@@ -1,0 +1,63 @@
+def task1() = {
+  val a = List(1, 2, 3, 1, 2, 3)
+  println(a.last)
+  def getLast[P](l : List[P]): P = {
+    l match {
+      case x :: Nil => x
+      case x :: l => getLast(l)
+      case _ => throw new Exception
+    }
+  }
+  println(getLast(a))
+}
+
+def task2() = {
+  val a = List(1, 2, 3, 1, 2, 3)
+  println(a.takeRight(2).head)
+  def getPreLast[P](l : List[P]): P = {
+    l match {
+      case x :: _ :: Nil => x
+      case x :: l => getPreLast(l)
+      case _ => throw new Exception
+    }
+  }
+  println(getPreLast(a))
+}
+def task3() = {
+  val a = List(1, 2, 3, 1, 2, 3)
+  val k = 3
+  println(a(k))
+  def getKthElement[P](l : List[P], k : Int): P = {
+    l match {
+      case x :: _ if k == 0 => x
+      case _ :: ar => getKthElement(ar, k - 1)
+      case _ => throw new Exception
+    }
+  }
+  println(getKthElement(a, k))
+}
+def task4() = {
+  val a = List(1, 2, 3, 1, 2, 3)
+  println(a.length)
+  def getLength[P](l : List[P]) : Int = {
+    l match {
+      case Nil => 0
+      case _ :: ar => getLength(ar) + 1
+      case _ => throw new Exception
+    }
+  }
+  println(getLength(a))
+}
+def task5() = {
+  val a = List(1, 2, 3, 1, 2, 3)
+  println(a.reverse)
+  def getReversed[P](l : List[P]) : List[P] = {
+    l match {
+      case Nil => Nil
+      case x :: ar => getReversed(ar) ::: List(x)
+      case _ => throw new Exception
+    }
+  }
+  println(getReversed(a))
+}
+task5()
