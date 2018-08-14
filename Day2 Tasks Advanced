@@ -1,0 +1,11 @@
+def duplicateN[P](n:Int, l : List[P]) = l.flatMap(x => List.fill(n)(x))
+println(duplicateN(4, List(1, 2, 3)))
+def myFlatten(l : List[Any]): List[Any] = {
+  l.flatMap(
+    x => x match {
+      case ar : List[_] => ar
+      case _ => List(x)
+    }
+  )
+}
+println(myFlatten(List(List(1, 2), 3)))
