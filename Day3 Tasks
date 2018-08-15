@@ -11,6 +11,18 @@ def RLE(s : String) = {
 }
 print(RLE("Uahhahhaaaa"))
 
+def RLEDecode(l : List[Any]): String = {
+  if (l.isEmpty) ""
+  else {
+    {l.head match {
+    case c : Char => c.toString
+    case t : (Int, Char) => List.fill(t._1)(t._2).mkString("")
+    case _ => throw new Exception
+    }} + RLEDecode(l.tail)
+  }
+}
+println(RLEDecode(List('a', (3, 'h'), 'a')))
+
 def isOdd(x : Int) = x % 2 == 1
 println(isOdd(3))
 
