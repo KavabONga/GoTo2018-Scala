@@ -1,7 +1,9 @@
 def isOdd(x : Int) = x % 2 == 1
 println(isOdd(3))
+
 def isEven(x : Int) = x % 2 == 1
 println(isEven(-4))
+
 def isSquared(x : Int) = {
   def mostSqrt(y : Int, s : Int = 0) : Int = {
     if ((s + 1) * (s + 1) > y) s
@@ -11,3 +13,17 @@ def isSquared(x : Int) = {
   t * t == x
 }
 println(isSquared(4))
+
+def getDigits(x : Int, firstCall : Boolean = true) : List[Int] = {
+  if (x == 0)
+    if (firstCall) List(0)
+    else List()
+  else
+    getDigits(x / 10) :+ x % 10
+}
+
+def sumOfDigits(x : Int) = getDigits(x).sum
+println(sumOfDigits(12345))
+
+def compositionOfDigits(x : Int) = getDigits(x).product
+println(compositionOfDigits(12345))
