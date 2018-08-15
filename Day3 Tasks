@@ -1,10 +1,13 @@
 def RLE(s : String) = {
-  s.tail.foldLeft(List((1, s.head)))((l, c) => {
-    if (l.last._2 == c)
-      l.init :+ (l.last._1 + 1, c)
-    else
-      l :+ (1, c)
-  })
+  if (s.isEmpty) List()
+  else {
+    s.tail.foldLeft(List((1, s.head)))((l, c) => {
+      if (l.last._2 == c)
+        l.init :+ (l.last._1 + 1, c)
+      else
+        l :+ (1, c)
+    })
+  }
 }
 println(RLE("Uaaahhhhaaaahhaa"))
 
