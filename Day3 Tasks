@@ -6,10 +6,10 @@ def RLE(s : String) = {
         l.init :+ (l.last._1 + 1, c)
       else
         l :+ (1, c)
-    })
+    }).map(p => if (p._1 == 1) p._2 else p)
   }
 }
-println(RLE("Uaaahhhhaaaahhaa"))
+print(RLE("Uahhahhaaaa"))
 
 def isOdd(x : Int) = x % 2 == 1
 println(isOdd(3))
