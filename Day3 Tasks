@@ -40,3 +40,37 @@ println(sumOfDigits(12345))
 
 def compositionOfDigits(x : Int) = getDigits(x).product
 println(compositionOfDigits(12345))
+
+def getDivisors(x : Int, d : Int = 1): List[Int] = {
+  if (d > x) List()
+  else {
+    if (x % d == 0) d :: getDivisors(x, d + 1)
+    else getDivisors(x, d + 1)
+  }
+
+}
+
+def nthGreatestDivisor(x : Int, n : Int) =
+  getDivisors(x)(n - 1)
+println(nthGreatestDivisor(12, 3))
+
+def numOfDivisors(x : Int) = getDivisors(x).length
+println(numOfDivisors(100007))
+
+def sumOfDivisors(x : Int) = getDivisors(x).sum
+println(sumOfDivisors(100000))
+
+def isPrime(x : Int) = {
+  def primeCheck(n : Int, d : Int = 1): Boolean = {
+    if (d * d > 1)
+      false
+    else {
+      if (n % d == 0)
+        false
+      else
+        primeCheck(n, d + 1)
+    }
+  }
+  primeCheck(x)
+}
+println(isPrime(1000000007))
