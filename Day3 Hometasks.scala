@@ -22,3 +22,12 @@ def countCharChange(s : String) : Int = {
   })._1
 }
 println(countCharChange("This is so sad"))
+
+def binaryDivisors(x : Int, t : Int = 2): List[Int] = {
+  if (t > x) List()
+  else {
+    if (x % t == 0) t :: binaryDivisors(x, t * 2)
+    else binaryDivisors(x, t * 2)
+  }
+}
+ println(binaryDivisors(12))
