@@ -1,8 +1,8 @@
-def grayCode(n : Int): List[String] = {
-  if (n == 0) List("")
-  else {
-    val c = grayCode(n - 1)
-    c.map("0" + _) ::: c.reverse.map("1" + _)
-  }
+def grayEncode(n : Int): Int = {
+  n ^ (n >> 1)
 }
-println(grayCode(4).mkString("\n"))
+def grayDecode(g : Int) : Int = {
+  if (g == 0) 0
+  else g ^ grayDecode(g >> 1)
+}
+println(grayDecode(2))
