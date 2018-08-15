@@ -26,7 +26,7 @@ println(RLEDecode(List('a', (3, 'h'), 'a')))
 def isOdd(x : Int) = x % 2 == 1
 println(isOdd(3))
 
-def isEven(x : Int) = x % 2 == 1
+def isEven(x : Int) = x % 2 == 0
 println(isEven(-4))
 
 def isSquared(x : Int) = {
