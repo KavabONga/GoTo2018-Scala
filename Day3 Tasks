@@ -1,0 +1,13 @@
+def isOdd(x : Int) = x % 2 == 1
+println(isOdd(3))
+def isEven(x : Int) = x % 2 == 1
+println(isEven(-4))
+def isSquared(x : Int) = {
+  def mostSqrt(y : Int, s : Int = 0) : Int = {
+    if ((s + 1) * (s + 1) > y) s
+    else mostSqrt(y, s + 1)
+  }
+  val t = mostSqrt(x)
+  t * t == x
+}
+println(isSquared(4))
