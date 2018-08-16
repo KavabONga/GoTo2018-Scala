@@ -27,3 +27,21 @@ class Rational(m : Int, n : Int = 1) {
 
 }
 implicit def intToRational(x : Int): Rational = new Rational(x)
+
+val Codes: Map[Char, String] = Map(
+  'a' -> ".-", 'b' -> "-...", 'c' -> "-.-.", 'd' -> "-..",
+  'e' -> ".", 'f' -> "..-.", 'g' -> "--.", 'h' -> "....",
+  'i' -> "..", 'j' -> ".---", 'k' -> "-.-", 'l' -> ".-..",
+  'm' -> "--", 'n' -> "-.", 'o' -> "---", 'p' -> ".--.",
+  'q' -> "--.-", 'r' -> ".-.", 's' -> "...", 't' -> "-",
+  'u' -> "..-", 'v' -> "...-", 'w' -> ".--", 'x' -> "-..-",
+  'y' -> "-.--", 'z' -> "--..", '1' -> ".----", '2' -> "..---",
+  '3' -> "...--", '4' -> "....-", '5' -> ".....", '6' -> "-....",
+  '7' -> "--...", '8' -> "---..", '9' -> "----.", '0' -> "-----",
+  ' ' -> "/")
+def MorseEncode(s : String): String = s.toList.map(Codes.getOrElse(_, "")).filterNot(_ == "").mkString("|")
+def MorseDecode(code : String) : String = {
+  val revCodes = Codes.toList.map(p => (p._2, p._1)).toMap
+  code.split("\\|").map(c => revCodes.getOrElse(c, "")).mkString("")
+}
+println(MorseDecode(MorseEncode("this is epic")))
