@@ -20,30 +20,30 @@ object UsefulFuture extends LazyLogging {
       case Failure(exception) => Future.failed(exception)
     }
   }
-  def ifFailure[T](f : Future[T], funcFail: => Unit, exc : Option[Throwable] = None) : T = {
+  def ifFailure[T](f : Future[T], funcFail: => Unit, exc : Option[Throwable] = None) : Future[T] = {
     Try(Await.result( f, Duration(10, SECONDS))) match {
-      case Failure(_) => {
+      case Failure(ex) => {
         funcFail
-        throw exc.get
+        Future.failed(exc.getOrElse(ex))
       }
-      case Success(value) => value
+      case Success(value) => f
     }
   }
-  def completeAndThen[A, B](firstFuture : Future[A], lastFuture : Future[B]) = {
+  def completeAndThen[T](firstFuture : Future[T], lastFuture : Future[T]) = {
     Try(Await.result(firstFuture, Duration(10, SECONDS))) match {
       case Success(_) => lastFuture
-      case Failure(exc) => throw exc
+      case Failure(exc) => firstFuture
     }
   }
-  def completeAndThenComplete[A, B](firstFuture : Future[A], lastFuture : Future[B]) = {
+  def completeAndThenComplete[T](firstFuture : Future[T], lastFuture : Future[T]) = {
     Try(Await.result(firstFuture, Duration(10, SECONDS))) match {
       case Success(_) => {
         Try(Await.result(lastFuture, Duration(10, SECONDS))) match {
-          case Success(value) => value
-          case Failure(exc) => throw exc
+          case Success(value) => lastFuture
+          case Failure(exc) => Future.failed(exc)
         }
       }
-      case Failure(exc) => throw exc
+      case Failure(_) => firstFuture
     }
   }
 }
