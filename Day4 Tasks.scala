@@ -14,7 +14,12 @@ object UsefulFuture extends LazyLogging {
         throw new Exception
       }
     }
-  def bypassOnComplete[A, T](f : Future[T], func: T => A) : Future[A] = f.map(func)
+  def bypassOnComplete[A, T](f : Future[T], func: T => A) : Future[A] = {
+    Try(Await.result( f, Duration(10, SECONDS))) match {
+      case Success(_) => f.map(func)
+      case Failure(exception) => Future.failed(exception)
+    }
+  }
   def ifFailure[T](f : Future[T], funcFail: => Unit, exc : Option[Throwable] = None) : T = {
     Try(Await.result( f, Duration(10, SECONDS))) match {
       case Failure(_) => {
