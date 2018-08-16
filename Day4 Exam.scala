@@ -52,3 +52,10 @@ println(isSorted(List(3, 3, 5, 6)))
 
 def listContains[T](l : List[T], elem: T) = l.contains(elem)
 println(listContains(List('a', 'b', 'c'), 'c'))
+
+def insertSort(l : List[Int]) = 
+  l.tail.foldLeft(List(l.head))((l, x) => {
+    val p = l.span(_ <= x)
+    (p._1 :+ x) ::: p._2
+  })
+println(insertSort(List(4, 2, 1, 4, 5)))
