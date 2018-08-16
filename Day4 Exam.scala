@@ -49,3 +49,6 @@ println(MorseDecode(MorseEncode("this is epic")))
 def isSorted(l : List[Int]) = 
   l.tail.foldLeft((true, l.head))((p, x) => (p._1 && x >= p._2, x))._1
 println(isSorted(List(3, 3, 5, 6)))
+
+def listContains[T](l : List[T], elem: T) = l.contains(elem)
+println(listContains(List('a', 'b', 'c'), 'c'))
