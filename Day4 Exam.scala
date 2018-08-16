@@ -71,3 +71,11 @@ def samplesRepeated(n : Int, k: Int) =
   factorial(n) / factorial(n - k)
 def samplesNotRepeated(n : Int, k : Int) =
   factorial(n) / (factorial(k) * factorial(n - k))
+
+implicit class IntOption(input: Option[Int]) {
+  def getOrZero = input.getOrElse(0)
+  def getOrMax = input.getOrElse(Int.MaxValue)
+}
+implicit class ThrowableOption[T](input: Option[T]) {
+  def getOrThrow(ex : Exception) = input.getOrElse(throw ex)
+}
