@@ -59,3 +59,15 @@ def insertSort(l : List[Int]) =
     (p._1 :+ x) ::: p._2
   })
 println(insertSort(List(4, 2, 1, 4, 5)))
+
+def factorial(n : Int):Int = if (n == 0) 1 else n * factorial(n - 1)
+
+def placementsRepeated(n : Int) = factorial(n)
+def placementsNotRepeated[T](l : List[T]) =
+  placementsRepeated(l.length) / l.distinct.map(x => factorial(l.count(x == _))).product
+println(placementsNotRepeated(List(1, 1, 3, 3)))
+
+def samplesRepeated(n : Int, k: Int) =
+  factorial(n) / factorial(n - k)
+def samplesNotRepeated(n : Int, k : Int) =
+  factorial(n) / (factorial(k) * factorial(n - k))
