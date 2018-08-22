@@ -25,4 +25,8 @@ insert into experience values(1, 433443, 2),
                              (5, 191919, 1),
                              (6, 121212, 1)
 update experience set years_of_experience = 9 where worker_id = (select id from workers where name = 'Max')
-select * from experience
+select * from workers where (age >= 23 and age < 27) or salary = 1000
+select * from workers where name = 'John' or name = 'Mary'
+select phone_number from experience where worker_id = (select id from workers where name = 'John')
+select * from workers where (select phone_number from experience where worker_id = id) % 10 = 1
+select * from workers where (select years_of_experience from experience where worker_id = id) > 2
